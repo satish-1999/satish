@@ -1,0 +1,56 @@
+package FileHand;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.PrintWriter;
+
+public class Test4 
+{
+	public static void main(String[] args) throws IOException
+	{
+		File f1=new File("D:\\file1.txt");
+		File f2=new File("D:\\file2.txt");
+		f1.createNewFile();
+		f2.createNewFile();
+		PrintWriter pw=new PrintWriter(f1);
+		pw.println(100);
+		pw.println(200);
+		pw.println(300);
+		pw.flush();
+		pw.close();
+		
+		PrintWriter pw1=new PrintWriter(f2);
+		pw1.println(400);
+		pw1.println(500);
+		pw1.println(600);
+		pw1.flush();
+		pw1.close();
+		
+		PrintWriter pw2=new PrintWriter("D:\\file3.txt");
+		BufferedReader br1=new BufferedReader(new FileReader(f1));
+		BufferedReader br2=new BufferedReader(new FileReader(f2));
+		String line1=br1.readLine();
+		String line2=br2.readLine();
+		while(line1!=null || line2!=null)
+		{
+			if(line1!=null)
+			{
+				pw2.println(line1);
+				line1=br1.readLine();
+			}
+			if(line2!=null)
+			{
+				pw2.println(line2);
+				line2=br2.readLine();
+			}
+		}
+		
+		pw2.flush();
+		br1.close();
+		br2.close();
+		pw2.close();
+	}
+
+}
